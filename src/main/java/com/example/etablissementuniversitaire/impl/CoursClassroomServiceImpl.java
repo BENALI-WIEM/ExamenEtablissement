@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CoursClassroomServiceImpl implements ICoursClassroomService {
@@ -33,9 +35,13 @@ public class CoursClassroomServiceImpl implements ICoursClassroomService {
 
     @Override
     @Transactional
-    public void archiverCoursClassrooms() {
-        coursClassroomRepository.archive();
-    }
+    public void archiverCoursClassrooms()	{
+        List<CoursClassroom> ccs= coursClassroomRepository.findAll();
+
+        for (CoursClassroom coursClassroom : ccs) {
+            coursClassroom.setArchive(true);
+            coursClassroomRepository.save(coursClassroom);
+        }}
 
     @Override
     public int nbHeuresParSpecEtNiv(Specialite specialite, Niveau niveau) {

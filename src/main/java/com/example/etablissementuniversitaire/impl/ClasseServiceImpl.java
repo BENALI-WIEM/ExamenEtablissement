@@ -15,4 +15,5 @@ public class ClasseServiceImpl implements IClasseService {
     public Classe ajouterClasse(Classe classe) {
         return classeRepository.save(classe);
     }
+
 }
